@@ -108,12 +108,13 @@ public class Bloodhound implements TypedOperationSelector {
     // The number of methods under test, corresponds to |M| in the GRT paper.
     int numOperations = this.operationSimpleList.size();
 
-    // Default weight is uniform probability.  If is used if no coverage details are available.
-    // This is the case for classes like java.lang.Object (not explicitly under test).
-    double weight = 1.0 / numOperations;
-
     // Recompute weights for all operations.
     for (TypedOperation operation : operationSimpleList) {
+      // Default weight is uniform probability.
+      double weight = 1.0 / numOperations;
+
+      // Coverage details are not available for classes like java.lang.Object (not explicitly
+      // under test).
       CoverageTracker.BranchCoverage covDet =
           CoverageTracker.instance.getDetailsForMethod(operation.getName());
 
