@@ -263,7 +263,6 @@ public class RandoopSystemTest {
     options.setOption("operation-history-log", "-"); // log to stdout
     options.setOption("omitmethods", "java7.util7.Collections.max"); // Instantiation issue
     options.setOption("omitmethods", "java7.util7.Collections.min"); // Instatiation issue
-    options.setOption("omitmethods", "java7.util7.LinkedList.remove"); // Flaky test issue
 
     CoverageChecker coverageChecker =
         new CoverageChecker(
