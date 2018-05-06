@@ -74,9 +74,11 @@ public class TypeInstantiator {
     if (operation != null && operation.hasWildcardTypes()) {
       Log.logPrintf("Applying capture conversion to %s%n", operation);
       operation = operation.applyCaptureConversion();
+      Log.logPrintf("capture conversion applied to  %s%n", operation);
     }
     if (operation != null) {
       operation = instantiateOperationTypes(operation);
+      Log.logPrintf("operation instantiated:  %s%n", operation);
     }
 
     // if operation == null failed to build instantiation
