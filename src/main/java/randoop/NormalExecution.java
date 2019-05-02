@@ -1,5 +1,6 @@
 package randoop;
 
+import java.lang.reflect.Array;
 import java.util.Objects;
 
 /**
@@ -39,14 +40,20 @@ public class NormalExecution extends ExecutionOutcome {
    */
   @Override
   public String toString() {
-    String value;
+    String resultString;
     try {
-      value = Objects.toString(result);
+      resultString = Objects.toString(result);
     } catch (Throwable t) {
-      value = "???";
+      resultString = "???";
     }
-    return String.format(
-        "[NormalExecution %s%s]",
-        value, (result == null ? "" : (" [of class " + result.getClass().getName() + "]")));
+    if (result != null) {
+      Class<?> resultClass = result.getClass();
+      if (resultClass.isArray()) {
+        resultString += ", of length " + Array.getLength(result);
+      } else {
+        resultString += ", class = " + resultClass;
+      }
+    }
+    return String.format("[NormalExecution result=%s]", resultString);
   }
 }

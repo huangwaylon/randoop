@@ -136,6 +136,14 @@ public abstract class TypedOperation
   @Override
   public String toString() {
     return getName() + " : " + inputTypes + " -> " + outputType;
+
+    /// More verbose version:
+    // String result = getName() + " : " + inputTypes + " -> " + outputType;
+    // if (operation.isMethodCall()) {
+    //   result = ((MethodCall) operation).getMethod().getDeclaringClass().toString() + "." +
+    // result;
+    // }
+    // return result;
   }
 
   @Override
