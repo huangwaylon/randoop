@@ -5,8 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 import randoop.CheckRep;
 import randoop.util.Log;
 
@@ -24,11 +23,11 @@ public class DefaultReflectionPredicate implements ReflectionPredicate {
    * The set of fully-qualified field names to omit from generated tests. See {@link
    * randoop.main.GenInputsAbstract#omit_field}.
    */
-  private Set<String> omitFields;
+  private Collection<String> omitFields;
 
   /** Create a reflection predicate. */
   public DefaultReflectionPredicate() {
-    this(new HashSet<String>());
+    this(null);
   }
 
   /**
@@ -37,7 +36,7 @@ public class DefaultReflectionPredicate implements ReflectionPredicate {
    *
    * @param omitFields set of fully-qualified field names to omit
    */
-  public DefaultReflectionPredicate(Set<String> omitFields) {
+  public DefaultReflectionPredicate(Collection<String> omitFields) {
     super();
     this.omitFields = omitFields;
   }
@@ -186,6 +185,10 @@ public class DefaultReflectionPredicate implements ReflectionPredicate {
    * Returns true if the class defines the given method, not as a bridge method. Returns false if
    * the class does not define the given method, or if the class defines the method as a bridge
    * method. Ignores inheritance of methods.
+   *
+   * @param c the possibly-containing class
+   * @param goalMethod the method to search for
+   * @return true if the class defines the method
    */
   private boolean definesNonBridgeMethod(Class<?> c, Method goalMethod) {
     try {

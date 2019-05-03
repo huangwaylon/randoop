@@ -1,6 +1,5 @@
 package randoop.sequence;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import randoop.ExecutionOutcome;
@@ -14,8 +13,10 @@ import randoop.types.Type;
 import randoop.types.TypeTuple;
 
 /**
- * Statement represents a statement involving an operation (or term), and the list of inputs for the
- * statement. The inputs are variables, but are represented by indexing into the enclosing sequence.
+ * Statement represents a Java statement, such as a method call {@code Foo f = m(i1...iN)} or a
+ * declaration {@code int x = 0}. The statement's data includes an operation and the list of inputs
+ * for the operation. The inputs to the operation are variables, but are represented by indexing
+ * into the enclosing sequence.
  */
 public final class Statement {
 
@@ -41,7 +42,7 @@ public final class Statement {
   }
 
   /**
-   * Creates a statement based on the given operation
+   * Creates a statement based on the given operation.
    *
    * @param operation the operation for action of this statement
    */
@@ -156,11 +157,10 @@ public final class Statement {
    * execute performs the operation of the statement for the input variables and returns outcome.
    *
    * @param inputs list of objects to use as inputs to execution
-   * @param out stream for any output
    * @return object representing outcome of computation
    */
-  public ExecutionOutcome execute(Object[] inputs, PrintStream out) {
-    return operation.execute(inputs, out);
+  public ExecutionOutcome execute(Object[] inputs) {
+    return operation.execute(inputs);
   }
 
   /**
